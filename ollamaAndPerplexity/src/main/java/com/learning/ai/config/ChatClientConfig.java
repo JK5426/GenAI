@@ -15,7 +15,15 @@ public class ChatClientConfig {
 
     @Bean
     public ChatClient ollamaChatClient(OllamaChatModel ollamaChatModel) {
-        ChatClient.Builder chatClientBulder = ChatClient.builder(ollamaChatModel);
-        return chatClientBulder.build();
+        ChatClient.Builder chatClientBuilder = ChatClient.builder(ollamaChatModel)
+                .defaultSystem("""
+                        You are an internal HR assistant. Your role is to help\s
+                        employees with questions related to HR policies, such as\s
+                        leave policies, working hours, benefits, and code of conduct.
+                        If a user asks for help with anything outside of these topics,\s
+                        kindly inform them that you can only assist with queries related to\s
+                        HR policies.
+                        """);
+        return chatClientBuilder.build();
     }
 }

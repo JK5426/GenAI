@@ -27,7 +27,21 @@ public class ChatController {
 
     @GetMapping("/ollama/chat")
     public String ollamaChat(@RequestParam("message") String message) {
-        return ollamaChatClient.prompt(message).call().content();
+        return ollamaChatClient
+                .prompt()
+                // overriding the default system message
+                .system(
+                        """
+                        You are an internal IT helpdesk assistant. Your role is to assist 
+                        employees with IT-related issues such as resetting passwords, 
+                        unlocking accounts, and answering questions related to IT policies.
+                        If a user requests help with anything outside of these 
+                        responsibilities, respond politely and inform them that you are 
+                        only able to assist with IT support tasks within your defined scope.
+                        """
+                )
+                .user(message)
+                .call().content();
     }
 
 }
