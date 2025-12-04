@@ -8,7 +8,7 @@ spring:
       base-url: http://localhost:11434   # where your Ollama server runs        # or your desired strategy
       chat:
         options:
-          model: deepseek-r1:8b                # or whichever local model you pulled
+          model: llama3.2:3b                # or whichever local model you pulled
           temperature: 0.7
           # other Ollama-specific options if needed
 
