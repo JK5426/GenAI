@@ -2,7 +2,6 @@ package com.learning.ai.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
@@ -13,7 +12,7 @@ public class StreamController {
 
     private final ChatClient ollamaChatClient;
 
-    public StreamController(@Qualifier("ollamaChatClient") ChatClient ollamaChatClient) {
+    public StreamController(@Qualifier("chatMemoryChatClient") ChatClient ollamaChatClient) {
         this.ollamaChatClient = ollamaChatClient;
     }
 
