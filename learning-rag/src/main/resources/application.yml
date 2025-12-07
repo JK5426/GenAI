@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: learning-rag
+
+  ai:
+    # For Ollama (local model)
+    ollama:
+      base-url: http://localhost:11434   # where your Ollama server runs        # or your desired strategy
+      chat:
+        options:
+          model: llama3.2:3b                # or whichever local model you pulled
+          temperature: 0.7
+          # other Ollama-specific options if needed
+
+    # For OpenAI / Perplexity-compatible API
+    openai:
+      api-key: ${PERPLEXITY_API_KEY}
+      base-url: "https://api.perplexity.ai"
+      chat:
+        completions-path: "/chat/completions"
+        options :
+          model : "sonar"
+    vectorstore:
+      qdrant:
+        initialize-schema: true
+        host: localhost
+        port: 6334
+        collection-name: AILearning
+
+    chat:
+      client:
+        enabled: false
+
+  docker:
+    compose:
+      stop:
+        command: down
+logging:
+  pattern:
+    console : "%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n"
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
